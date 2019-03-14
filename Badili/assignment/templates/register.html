@@ -1,0 +1,48 @@
+
+{% extends "layout_registration.html" %}
+{% block content %}
+
+       
+    <div class="content-section">
+
+       <form method = "POST" action="/register" class = "form-group">
+            <!----> 
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Us:</legend>
+                <label for="pname">User Name</label>
+                <br>
+                <input type="text" name="name" value="">
+                <br>
+                <label for="pwd">Password</label>
+                <br>
+                <input type="password" name="pwd" value="">
+                <br>
+                <label for="pwd2">Confirm Password</label>
+                <br>
+                <input type="password" name="pwd2" value="">
+                <br>
+                <label for="pname">E Mail</label>
+                <br>
+                <input type="Email" name="email" value="">
+                <br>
+                <label for="pname">First Name</label>
+                <br>
+                <input type="text" name="firstname" value="">
+                <br>
+                <label for="pname">Last Name</label>
+                <br>
+                <input type="text" name="lastname" value="">
+                <br>
+                <br>
+                <input type="submit" value="Submit">
+            </fieldset> 
+        </form>
+
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                 Already Have an Account<a class="ml-2" href="{{url_for('login')}}">Sign in</a>
+            </small>
+            
+        </div>
+     </div>
+{% endblock content%}

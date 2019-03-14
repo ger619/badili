@@ -1,0 +1,38 @@
+{% extends "layout_home.html" %}
+{% block content %}
+
+
+    <form method = "POST" action="/home/<user>">
+
+                    <!----> 
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Inquire:</legend>
+               
+                <br>
+                <label for="aid">Age In Day</label>
+                <br>
+                <input type="text" name="age_in_day" value="">
+                <br>
+                <label for="nfw">No Of Weeks</label>
+                <br>
+                <input type="text" name="no_of_weeks" value="">
+                <br>
+                <label for="tof">Type Of Feed</label>
+                <br>
+                <input type="text" name="type_of_feed" value="">
+                <br>
+                <label for="tov">Type Of Vaccine</label>
+                <br>
+                <input type="text" name="type_of_vaccines" value="">
+                <br>
+                <label for="com">Comments</label>
+                <br>
+                <input type="text" name="comments" value="">
+                <br>
+                <br>
+
+                <input type="submit" value="Submit">
+            </fieldset> 
+      </form>
+
+{% endblock content%}
