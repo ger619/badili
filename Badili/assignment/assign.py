@@ -47,13 +47,16 @@ def login():
         #If username and data is there the we check in the db
         else:
             #We pick from the dbc script 
+
             flaskdb = dbconnect('projectbadili','root','')
             #Run the cursor command
             flaskdbcur = flaskdb.cursor()
             #Execute the cursor command to select the db
             flaskdbcur.execute('SELECT * FROM users WHERE username = %s',(data['username'],))
             #Ensure the database is not blank and fetch one
-            if flaskdbcur.rowcount > 0:
+            print ('usernama done')
+            if flaskdbcur.rowcount < 0:
+                print ('username brought back')
                 users = flaskdbcur.fetchone()
                 #Once fectched we compare if the value input is same as the databse input
                 if users[2] == data['pwd']:
@@ -75,7 +78,7 @@ def home(user):
     #This is used to call the database and authenticate select all and display
     flaskdb = dbconnect('projectbadili','root','')
     flaskdbcur = flaskdb.cursor()
-    flaskdbcur.execute("SELECT * FROM chicken ORDER BY id DESC")
+    flaskdbcur.execute("SELECT * FROM feedback ORDER BY id DESC")
     data = flaskdbcur.fetchall()
 
     if request.method == 'POST':
@@ -86,10 +89,10 @@ def home(user):
             global username
             flaskdbcur.execute('INSERT INTO chicken(name_of_farmer, age_in_day, no_of_weeks, type_of_feed, type_of_vaccines, comments) VALUES(%s, %s, %s, %s, %s, %s)',( username, data['age_in_day'],data['no_of_weeks'],data['type_of_feed'],data['type_of_vaccines'],data['comments'],))
             flaskdb.commit()
-            flaskdbcur.execute("SELECT * FROM feedback WHERE age_in_weeks = '1' ORDER BY id DESC")
+            flaskdbcur.execute("SELECT * FROM feedback ORDER BY id DESC")
             data = flaskdbcur.fetchall()
             
-            return redirect('/home/<user>')
+            return redirect('/home/<user>' )
         else:
            
             flaskdb = dbconnect('projectbadili','root','')
@@ -120,5 +123,5 @@ def home(user):
 
 
     
-    return render_template('homepage.html', title = 'Profile', user = user , data = data  )
+    return render_template('homepage.html', title = 'Profile', user = user , data = data)
 
