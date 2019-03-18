@@ -20,6 +20,7 @@ def register():
         elif data['pwd'] != data['pwd2']:
             
             return redirect ('/register' )
+        #This connects to the database and sends posts it to the database
         else :
             flaskdb = dbconnect('projectbadili','root','')
             flaskdbcur = flaskdb.cursor()
@@ -42,21 +43,18 @@ def login():
     if request.method == 'POST':
         data = request.values
         #Ensure the user name and data is not empty
-        if data['username'] == ''or data['pwd'] == '' :
+        if data['user'] == ''or data['pwd'] == '' :
             return redirect(url_for('login'))
         #If username and data is there the we check in the db
         else:
             #We pick from the dbc script 
-
             flaskdb = dbconnect('projectbadili','root','')
             #Run the cursor command
             flaskdbcur = flaskdb.cursor()
             #Execute the cursor command to select the db
-            flaskdbcur.execute('SELECT * FROM users WHERE username = %s',(data['username'],))
+            flaskdbcur.execute('SELECT * FROM users WHERE username = %s',(data['user'],))
             #Ensure the database is not blank and fetch one
-            print ('usernama done')
-            if flaskdbcur.rowcount < 0:
-                print ('username brought back')
+            if flaskdbcur.rowcount > 0:
                 users = flaskdbcur.fetchone()
                 #Once fectched we compare if the value input is same as the databse input
                 if users[2] == data['pwd']:
@@ -76,24 +74,17 @@ def login():
 @app.route('/home/<user>', methods = ['POST', 'GET'])
 def home(user):
     #This is used to call the database and authenticate select all and display
-#    flaskdb = dbconnect('projectbadili','root','')
- #   flaskdbcur = flaskdb.cursor()
-  #  flaskdbcur.execute("SELECT * FROM feedback Where id = 1 ORDER BY id DESC")
-   # data = flaskdbcur.fetchall()
+    flaskdb = dbconnect('projectbadili','root','')
+    flaskdbcur = flaskdb.cursor()
+    flaskdbcur.execute("SELECT * FROM chicken ORDER BY id DESC")
+    data = flaskdbcur.fetchall()
+
 
     if request.method == 'POST':
         data = request.values
-        if data['age_in_day'] == '1' or '2' and data['no_of_weeks'] != '' and data['type_of_feed']:
-            flaskdb = dbconnect('projectbadili','root','')
-            flaskdbcur = flaskdb.cursor()
-            global username
-            flaskdbcur.execute('INSERT INTO chicken(name_of_farmer, age_in_day, no_of_weeks, type_of_feed, type_of_vaccines, comments) VALUES(%s, %s, %s, %s, %s, %s)',( username, data['age_in_day'],data['no_of_weeks'],data['type_of_feed'],data['type_of_vaccines'],data['comments'],))
-            flaskdb.commit()
-            print('Db Execute')
-            flaskdbcur.execute("SELECT * FROM feedback WHERE id = 1 ORDER BY id DESC")
-            print ("search execute")
-            data = flaskdbcur.fetchall()            
-            return render_template( 'homepage.html', data = data) 
+        if data['age_in_day'] == '' or data['no_of_weeks'] =="":
+
+            return redirect('/home/<user>')
         else:
            
             flaskdb = dbconnect('projectbadili','root','')
@@ -103,26 +94,6 @@ def home(user):
             flaskdb.commit()
             return redirect('/home/<user>')
 
-#   if data['age_in_day'] == '' or data['no_of_weeks'] =="" or data['type_of_feed'] =="" or data['type_of_vaccines'] =="":
-#       data = request.values
-#       flaskdb = dbconnect('projectbadili','root','')
-#       flaskdbcur = flaskdb.cursor()
-#       flaskdbcur.execute("SELECT * FROM chicken ORDER BY id DESC")
-#       data = flaskdbcur.fetchall()
-#       return redirect('/home/<user>')
     
-#    elif data['age_in_day'] == '' or data['no_of_weeks'] =="" or data['type_of_feed'] =="" or data['type_of_vaccines'] =="":
-#        flaskdb = dbconnect('projectbadili','root','')
-#        flaskdbcur = flaskdb.cursor()
-#        flaskdbcur.execute("SELECT * FROM chicken ORDER BY id DESC")
-#        data = flaskdbcur.fetchall()
-#    else :
-#        flaskdb = dbconnect('projectbadili','root','')
-#        flaskdbcur = flaskdb.cursor()
-#        flaskdbcur.execute("SELECT * FROM chicken ORDER BY id DESC")
-#        data = flaskdbcur.fetchall()
-
-
-    
-    return render_template('homepage.html', title = 'Profile', user = user )
+    return render_template('homepage.html', title = 'Profile', user = user , data=data)
 
