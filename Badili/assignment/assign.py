@@ -83,7 +83,9 @@ def home(user):
 
     if request.method == 'POST':
         data = request.values
-        if data['age_in_day'] >= '1'   :
+        print ('check1')
+        if data['age_in_day'] <= '1'   :
+            print ('user back')
             flaskdb = dbconnect('projectbadili','root','')
             flaskdbcur = flaskdb.cursor()
             global username
@@ -95,7 +97,7 @@ def home(user):
             data = flaskdbcur.fetchall()            
             return render_template( 'homepage.html', data = data) 
 
-        elif data['age_in_day'] >= '2' and data['no_of_weeks'] != ''  :
+        elif data['age_in_day'] <= '2' and data['no_of_weeks'] != ''  :
             flaskdb = dbconnect('projectbadili','root','')
             flaskdbcur = flaskdb.cursor()
             global username
@@ -107,7 +109,7 @@ def home(user):
             data = flaskdbcur.fetchall()            
             return render_template( 'homepage.html', data = data) 
 
-        elif data['age_in_day'] >= '3' :
+        elif data['age_in_day'] <= '3' :
             flaskdb = dbconnect('projectbadili','root','')
             flaskdbcur = flaskdb.cursor()
             global username
@@ -119,7 +121,7 @@ def home(user):
             data = flaskdbcur.fetchall()            
             return render_template( 'homepage.html', data = data) 
 
-        elif data['age_in_day'] >= '4' :
+        elif data['age_in_day'] <= '4' :
             flaskdb = dbconnect('projectbadili','root','')
             flaskdbcur = flaskdb.cursor()
             global username
@@ -131,7 +133,7 @@ def home(user):
             data = flaskdbcur.fetchall()            
             return render_template( 'homepage.html', data = data) 
 
-        elif data['age_in_day'] >= '5' :
+        elif data['age_in_day'] <= '5' :
             flaskdb = dbconnect('projectbadili','root','')
             flaskdbcur = flaskdb.cursor()
             global username
@@ -143,7 +145,7 @@ def home(user):
             data = flaskdbcur.fetchall()            
             return render_template( 'homepage.html', data = data) 
 
-        elif data['age_in_day'] >= '6' :
+        elif data['age_in_day'] <= '6' :
             flaskdb = dbconnect('projectbadili','root','')
             flaskdbcur = flaskdb.cursor()
             global username
@@ -155,7 +157,7 @@ def home(user):
             data = flaskdbcur.fetchall()            
             return render_template( 'homepage.html', data = data) 
 
-        elif data['age_in_day'] >= '7' :
+        elif data['age_in_day'] <= '7' :
             flaskdb = dbconnect('projectbadili','root','')
             flaskdbcur = flaskdb.cursor()
             global username
@@ -167,7 +169,7 @@ def home(user):
             data = flaskdbcur.fetchall()            
             return render_template( 'homepage.html', data = data) 
 
-        elif data['age_in_day'] >= '8' :
+        elif data['age_in_day'] <= '8' :
             flaskdb = dbconnect('projectbadili','root','')
             flaskdbcur = flaskdb.cursor()
             global username
@@ -179,7 +181,7 @@ def home(user):
             data = flaskdbcur.fetchall()            
             return render_template( 'homepage.html', data = data) 
 
-        elif data['age_in_day'] >= '9' :
+        elif data['age_in_day'] <= '9' :
             flaskdb = dbconnect('projectbadili','root','')
             flaskdbcur = flaskdb.cursor()
             global username
@@ -191,7 +193,7 @@ def home(user):
             data = flaskdbcur.fetchall()            
             return render_template( 'homepage.html', data = data) 
 
-        elif data['age_in_day'] >= '10' :
+        elif data['age_in_day'] <= '10' :
             flaskdb = dbconnect('projectbadili','root','')
             flaskdbcur = flaskdb.cursor()
             global username
