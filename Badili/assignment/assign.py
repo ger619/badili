@@ -1,11 +1,14 @@
 from flask import Flask, render_template , url_for, request , redirect , flash
 from dbc import dbconnect
+from flask_migrate import Migrate
+
 
  
 username = None
 
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 
 global username
 #For Registration purpose
@@ -97,7 +100,7 @@ def home(user):
             data = flaskdbcur.fetchall()            
             return render_template( 'homepage.html', data = data) 
 
-        elif data['age_in_day'] <= '2' and data['no_of_weeks'] != ''  :
+        elif data['age_in_day'] <= '2' :
             flaskdb = dbconnect('projectbadili','root','')
             flaskdbcur = flaskdb.cursor()
             global username
@@ -212,26 +215,6 @@ def home(user):
             flaskdbcur.execute('INSERT INTO chicken(name_of_farmer, age_in_day, no_of_weeks, type_of_feed, type_of_vaccines, comments) VALUES(%s, %s, %s, %s, %s, %s)',( username, data['age_in_day'],data['no_of_weeks'],data['type_of_feed'],data['type_of_vaccines'],data['comments'],))
             flaskdb.commit()
             return redirect('/home/<user>')
-
-#   if data['age_in_day'] == '' or data['no_of_weeks'] =="" or data['type_of_feed'] =="" or data['type_of_vaccines'] =="":
-#       data = request.values
-#       flaskdb = dbconnect('projectbadili','root','')
-#       flaskdbcur = flaskdb.cursor()
-#       flaskdbcur.execute("SELECT * FROM chicken ORDER BY id DESC")
-#       data = flaskdbcur.fetchall()
-#       return redirect('/home/<user>')
-    
-#    elif data['age_in_day'] == '' or data['no_of_weeks'] =="" or data['type_of_feed'] =="" or data['type_of_vaccines'] =="":
-#        flaskdb = dbconnect('projectbadili','root','')
-#        flaskdbcur = flaskdb.cursor()
-#        flaskdbcur.execute("SELECT * FROM chicken ORDER BY id DESC")
-#        data = flaskdbcur.fetchall()
-#    else :
-#        flaskdb = dbconnect('projectbadili','root','')
-#        flaskdbcur = flaskdb.cursor()
-#        flaskdbcur.execute("SELECT * FROM chicken ORDER BY id DESC")
-#        data = flaskdbcur.fetchall()
-
 
     
     return render_template('homepage.html', title = 'Profile', user = user )
