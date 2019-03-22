@@ -355,25 +355,55 @@ def vaccine(user):
 def temp(user):
     if request.method == 'POST':
         data = request.values
-        if data['age_in_day'] == '1'   :
+        if data['age_in_weeks'] == '1'   :
             flaskdb = dbconnect('aftermath','root','')
             flaskdbcur = flaskdb.cursor()
-            global username
-            flaskdbcur.execute('INSERT INTO vaccines(age_in_days,comments) VALUES( %s, %s)',(data['age_in_day'],data['comments'],))
-            flaskdb.commit()
             flaskdbcur.execute("SELECT * FROM feedback WHERE id = 1 ")
             data = flaskdbcur.fetchall()
+            if flaskdbcur.rowcount<0:
+                feedback = flaskdbcur.fetchone()
+                global temper
+                temper= feedback[7]
+                flaskdbcur = flaskdb.cursor()
+                flaskdbcur.execute('INSERT INTO temperature(age_in_weeks,temperature) VALUES( %s, %s)',(data['age_in_weeks'],temper,))
+                flaskdb.commit()
+                return redirect ('/temp/user')
+
+            
             return render_template( 'temperature.html', data = data) 
 
-        elif data['age_in_day'] == '14' :
+        elif data['age_in_weeks'] == '2' :
             flaskdb = dbconnect('aftermath','root','')
             flaskdbcur = flaskdb.cursor()
-            global username
-            flaskdbcur.execute('INSERT INTO vaccines(age_in_days,comments) VALUES( %s, %s)',(data['age_in_day'],data['comments'],))
-            flaskdb.commit()
-            flaskdbcur.execute("SELECT * FROM feedback WHERE id = 2 ORDER BY id DESC")
-            data = flaskdbcur.fetchall()            
+            flaskdbcur.execute("SELECT * FROM feedback WHERE id = 1 ")
+            data = flaskdbcur.fetchall()
+            if flaskdbcur.rowcount<0:
+                feedback = flaskdbcur.fetchone()
+                global temper
+                temper= feedback[7] - 3
+                flaskdbcur = flaskdb.cursor()
+                flaskdbcur.execute('INSERT INTO temperature(age_in_weeks,temperature) VALUES( %s, %s)',(data['age_in_weeks'],temper,))
+                flaskdb.commit()
+                return redirect ('/temp/user')
+
             return render_template( 'temperature.html', data = data) 
+
+        elif data['age_in_weeks'] == '3' :
+            flaskdb = dbconnect('aftermath','root','')
+            flaskdbcur = flaskdb.cursor()
+            flaskdbcur.execute("SELECT * FROM feedback WHERE id = 1 ")
+            data = flaskdbcur.fetchall()
+            if flaskdbcur.rowcount<0:
+                global temper
+                temper= feedback[7] - 6
+                flaskdbcur = flaskdb.cursor()
+                flaskdbcur.execute('INSERT INTO temperature(age_in_weeks,temperature) VALUES( %s, %s)',(data['age_in_weeks'],temper,))
+                flaskdb.commit()
+                return redirect ('/temp/user')
+
+            return render_template( 'temperature.html', data = data) 
+
+
 
     return render_template( 'temperature.html', user = user , title = 'Temperature') 
 
