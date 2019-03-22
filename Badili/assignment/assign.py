@@ -25,7 +25,7 @@ class users(db.Model):
     email = db.Column(db.String(32), nullable=False)
     firstname = db.Column(db.String(32), nullable=False)
     lastname = db.Column(db.String(32), nullable=False)
-   
+
    
 class farm(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -256,112 +256,95 @@ def home(user):
 def vaccine(user):
     if request.method == 'POST':
         data = request.values
-        if data['no_of_weeks'] <= '1'   :
-            print ('user back')
+        if data['age_in_day'] == '1'   :
             flaskdb = dbconnect('aftermath','root','')
             flaskdbcur = flaskdb.cursor()
             global username
-            flaskdbcur.execute('INSERT INTO feed(age_in_weeks,type_of_feed, intake_per_day) VALUES( %s, %s, %s)',(data['no_of_weeks'],data['type_of_feed'],data['intake_per_day'],))
+            flaskdbcur.execute('INSERT INTO vaccines(age_in_days,comments) VALUES( %s, %s)',(data['age_in_day'],data['comments'],))
             flaskdb.commit()
             flaskdbcur.execute("SELECT * FROM feedback WHERE id = 1 ")
             data = flaskdbcur.fetchall()
-            return render_template( 'homepage.html', data = data) 
+            return render_template( 'vaccine.html', data = data) 
 
-        elif data['no_of_weeks'] <= '2' :
+        elif data['age_in_day'] == '14' :
             flaskdb = dbconnect('aftermath','root','')
             flaskdbcur = flaskdb.cursor()
             global username
-            #flaskdbcur.execute('INSERT INTO feed(age_in_weeks,type_of_feed, intake_per_day) VALUES( %s, %s, %s)',(data['no_of_weeks'],data['type_of_feed'],data['intake_per_day'],))
-            #flaskdb.commit()
+            flaskdbcur.execute('INSERT INTO vaccines(age_in_days,comments) VALUES( %s, %s)',(data['age_in_day'],data['comments'],))
+            flaskdb.commit()
             flaskdbcur.execute("SELECT * FROM feedback WHERE id = 2 ORDER BY id DESC")
             data = flaskdbcur.fetchall()            
-            return render_template( 'homepage.html', data = data) 
+            return render_template( 'vaccine.html', data = data) 
 
-        elif data['no_of_weeks'] <= '3' :
+        elif data['age_in_day'] == '21' :
             flaskdb = dbconnect('aftermath','root','')
             flaskdbcur = flaskdb.cursor()
             global username
-            flaskdbcur.execute('INSERT INTO feed(age_in_weeks,type_of_feed, intake_per_day) VALUES( %s, %s, %s)',(data['no_of_weeks'],data['type_of_feed'],data['intake_per_day'],))
+            flaskdbcur.execute('INSERT INTO vaccines(age_in_days,comments) VALUES( %s, %s)',(data['age_in_day'],data['comments'],))
             flaskdb.commit()
             flaskdbcur.execute("SELECT * FROM feedback WHERE id = 3 ORDER BY id DESC")
             data = flaskdbcur.fetchall()            
-            return render_template( 'homepage.html', data = data) 
+            return render_template( 'vaccine.html', data = data) 
 
-        elif data['no_of_weeks'] <= '4' :
+        elif data['age_in_day'] == '24' :
             flaskdb = dbconnect('aftermath','root','')
             flaskdbcur = flaskdb.cursor()
             global username
-            flaskdbcur.execute('INSERT INTO feed(age_in_weeks,type_of_feed, intake_per_day) VALUES( %s, %s, %s)',(data['no_of_weeks'],data['type_of_feed'],data['intake_per_day'],))
+            flaskdbcur.execute('INSERT INTO vaccines(age_in_days,comments) VALUES( %s, %s)',(data['age_in_day'],data['comments'],))
             flaskdb.commit()
             flaskdbcur.execute("SELECT * FROM feedback WHERE id = 4 ORDER BY id DESC")
             data = flaskdbcur.fetchall()            
-            return render_template( 'homepage.html', data = data) 
+            return render_template( 'vaccine.html', data = data) 
 
-        elif data['no_of_weeks'] <= '5' :
+        elif data['age_in_day'] == '42' :
             flaskdb = dbconnect('aftermath','root','')
             flaskdbcur = flaskdb.cursor()
             global username
-            flaskdbcur.execute('INSERT INTO feed(age_in_weeks,type_of_feed, intake_per_day) VALUES( %s, %s, %s)',(data['no_of_weeks'],data['type_of_feed'],data['intake_per_day'],))
+            flaskdbcur.execute('INSERT INTO vaccines(age_in_days,comments) VALUES( %s, %s)',(data['age_in_day'],data['comments'],))
             flaskdb.commit()
             flaskdbcur.execute("SELECT * FROM feedback WHERE id = 5 ORDER BY id DESC")
             data = flaskdbcur.fetchall()            
-            return render_template( 'homepage.html', data = data) 
+            return render_template( 'vaccine.html', data = data) 
 
-        elif data['no_of_weeks'] <= '6' :
+        elif data['age_in_day'] == '56' :
             flaskdb = dbconnect('aftermath','root','')
             flaskdbcur = flaskdb.cursor()
             global username
-            flaskdbcur.execute('INSERT INTO feed(age_in_weeks,type_of_feed, intake_per_day) VALUES( %s, %s, %s)',(data['no_of_weeks'],data['type_of_feed'],data['intake_per_day'],))
+            flaskdbcur.execute('INSERT INTO vaccines(age_in_days,comments) VALUES( %s, %s)',(data['age_in_day'],data['comments'],))
             flaskdb.commit()
             flaskdbcur.execute("SELECT * FROM feedback WHERE id = 6 ORDER BY id DESC")
             data = flaskdbcur.fetchall()            
-            return render_template( 'homepage.html', data = data) 
+            return render_template( 'vaccine.html', data = data) 
 
-        elif data['no_of_weeks'] <= '7' :
+        elif data['age_in_day'] == '126' :
             flaskdb = dbconnect('aftermath','root','')
             flaskdbcur = flaskdb.cursor()
             global username
-            flaskdbcur.execute('INSERT INTO feed(age_in_weeks,type_of_feed, intake_per_day) VALUES( %s, %s, %s)',(data['no_of_weeks'],data['type_of_feed'],data['intake_per_day'],))            
+            flaskdbcur.execute('INSERT INTO vaccines(age_in_days,comments) VALUES( %s, %s)',(data['age_in_day'],data['comments'],))
             flaskdb.commit()
             flaskdbcur.execute("SELECT * FROM feedback WHERE id = 7 ORDER BY id DESC")
             data = flaskdbcur.fetchall()            
-            return render_template( 'homepage.html', data = data) 
+            return render_template( 'vaccine.html', data = data) 
 
-        elif data['no_of_weeks'] <= '8' :
+        elif data['age_in_day'] == '133' :
             flaskdb = dbconnect('aftermath','root','')
             flaskdbcur = flaskdb.cursor()
             global username
-            flaskdbcur.execute('INSERT INTO feed(age_in_weeks,type_of_feed, intake_per_day) VALUES( %s, %s, %s)',(data['no_of_weeks'],data['type_of_feed'],data['intake_per_day'],))
+            fflaskdbcur.execute('INSERT INTO vaccines(age_in_days,comments) VALUES( %s, %s)',(data['age_in_day'],data['comments'],))
             flaskdb.commit()
             flaskdbcur.execute("SELECT * FROM feedback WHERE id = 8 ORDER BY id DESC")
             data = flaskdbcur.fetchall()            
-            return render_template( 'homepage.html', data = data) 
+            return render_template( 'vaccine.html', data = data) 
 
-        elif data['no_of_weeks'] <= '9' :
-            flaskdb = dbconnect('aftermath','root','')
-            flaskdbcur = flaskdb.cursor()
-            global username
-            flaskdbcur.execute('INSERT INTO feed(age_in_weeks,type_of_feed, intake_per_day) VALUES( %s, %s, %s)',(data['no_of_weeks'],data['type_of_feed'],data['intake_per_day'],))
-            flaskdb.commit()
-            flaskdbcur.execute("SELECT * FROM feedback WHERE id = 9 ORDER BY id DESC")
-            data = flaskdbcur.fetchall()            
-            return render_template( 'homepage.html', data = data) 
-
-        elif data['no_of_weeks'] <= '10' :
-            flaskdb = dbconnect('aftermath','root','')
-            flaskdbcur = flaskdb.cursor()
-            global username
-            flaskdbcur.execute('INSERT INTO feed(age_in_weeks,type_of_feed, intake_per_day) VALUES( %s, %s, %s)',(data['no_of_weeks'],data['type_of_feed'],data['intake_per_day'],))
-            flaskdb.commit()
-            flaskdbcur.execute("SELECT * FROM feedback WHERE id = 10 ORDER BY id DESC")
-            data = flaskdbcur.fetchall()            
-            return render_template( 'homepage.html', data = data) 
+        elif data['age_in_day'] == '' or data['age_in_day'] != "" :
+                       
+            return render_template( 'vaccine.html', data = data) 
         else:
            
             flaskdb = dbconnect('aftermath','root','')
             flaskdbcur = flaskdb.cursor()
             global username
-            flaskdbcur.execute('INSERT INTO feed(age_in_weeks,type_of_feed, intake_per_day) VALUES( %s, %s, %s)',(data['no_of_weeks'],data['type_of_feed'],data['intake_per_day'],))
+            flaskdbcur.execute('INSERT INTO vaccines(age_in_days,comments) VALUES( %s, %s)',(data['age_in_day'],data['comments'],))
             flaskdb.commit()
             return redirect('/home/<user>')
 
@@ -370,5 +353,27 @@ def vaccine(user):
 
 @app.route('/temp/<user>', methods = ['POST', 'GET'])
 def temp(user):
+    if request.method == 'POST':
+        data = request.values
+        if data['age_in_day'] == '1'   :
+            flaskdb = dbconnect('aftermath','root','')
+            flaskdbcur = flaskdb.cursor()
+            global username
+            flaskdbcur.execute('INSERT INTO vaccines(age_in_days,comments) VALUES( %s, %s)',(data['age_in_day'],data['comments'],))
+            flaskdb.commit()
+            flaskdbcur.execute("SELECT * FROM feedback WHERE id = 1 ")
+            data = flaskdbcur.fetchall()
+            return render_template( 'temperature.html', data = data) 
+
+        elif data['age_in_day'] == '14' :
+            flaskdb = dbconnect('aftermath','root','')
+            flaskdbcur = flaskdb.cursor()
+            global username
+            flaskdbcur.execute('INSERT INTO vaccines(age_in_days,comments) VALUES( %s, %s)',(data['age_in_day'],data['comments'],))
+            flaskdb.commit()
+            flaskdbcur.execute("SELECT * FROM feedback WHERE id = 2 ORDER BY id DESC")
+            data = flaskdbcur.fetchall()            
+            return render_template( 'temperature.html', data = data) 
+
     return render_template( 'temperature.html', user = user , title = 'Temperature') 
 
